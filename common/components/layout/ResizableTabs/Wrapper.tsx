@@ -1,7 +1,5 @@
-import { ReactElement } from "react";
-
 export type Props = {
-  children: ReactElement;
+  children?: JSX.Element | JSX.Element[];
 };
 
 const Wrapper = ({ children }: Props) => {
