@@ -9,19 +9,15 @@ import Tab from "@/layout/ResizableTabs/Tab";
 export default function CodePage() {
   return (
     <Wrapper>
-      <Tab>
-        <Explorer />
-      </Tab>
+      <Explorer />
 
-      <Tab>
-        <Editor
-          className="h-screen"
-          height={"100vh"}
-          defaultLanguage="javascript"
-          theme="vs-dark"
-          defaultValue={"span"}
-        />
-      </Tab>
+      <Editor
+        className="h-screen"
+        height={"100vh"}
+        defaultLanguage="javascript"
+        theme="vs-dark"
+        defaultValue={"span"}
+      />
     </Wrapper>
   );
 }
