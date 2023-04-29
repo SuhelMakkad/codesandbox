@@ -13,7 +13,7 @@ export default function CodePage() {
         <Explorer />
       </Panel>
 
-      <PanelResizeHandle className="w-[0.2rem] bg-neutral-800 transition-[background-color] hover:bg-blue-300 data-[resize-handle-active]:bg-blue-300" />
+      <PanelResizeHandle className="w-[0.2rem] bg-neutral-700 transition-[background-color] hover:bg-blue-300 data-[resize-handle-active]:bg-blue-300" />
 
       <Panel minSize={50}>
         <FileTabs className="h-[2rem]" />
