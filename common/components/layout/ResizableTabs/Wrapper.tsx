@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 import ResizeBar from "./ResizeBar";
 
 export type Props = {
@@ -9,10 +11,10 @@ const Wrapper = ({ children }: Props) => {
     <div className="flex">
       {Array.isArray(children)
         ? children.map((c, index) => (
-            <>
+            <Fragment key={index}>
               {index > 0 ? <ResizeBar /> : ""}
               {c}
-            </>
+            </Fragment>
           ))
         : children}
     </div>
