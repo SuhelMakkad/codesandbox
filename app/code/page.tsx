@@ -1,19 +1,27 @@
 "use client";
 
-import FileIcon from "@/common/FileIcon";
 import Editor from "@monaco-editor/react";
+
+import Explorer from "@/standalone/Explorer";
+import Wrapper from "@/layout/ResizableTabs/Wrapper";
 
 export default function CodePage() {
   return (
-    <div>
-      <FileIcon filename="react.ts" />
+    <Wrapper>
+      <div>
+        <Explorer />
+      </div>
 
-      <Editor
-        height="90vh"
-        defaultLanguage="javascript"
-        theme="vs-dark"
-        defaultValue={"span"}
-      />
-    </div>
+      <div className="hover w-1 bg-neutral-600" />
+
+      <div>
+        <Editor
+          height={"100vh"}
+          defaultLanguage="javascript"
+          theme="vs-dark"
+          defaultValue={"span"}
+        />
+      </div>
+    </Wrapper>
   );
 }
