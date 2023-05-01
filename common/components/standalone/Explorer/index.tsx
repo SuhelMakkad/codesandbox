@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import FileIcon from "@/ui/FileIcon";
+import TabButton from "./TabButton";
 
 export type File = {
   name: string;
@@ -23,16 +24,11 @@ const Explorer = ({ files, name }: Props) => {
     <ul className="flex flex-col text-sm text-neutral-200">
       {name && (
         <li>
-          <button
+          <TabButton
             onClick={() => setIsFolderOpen((prev) => !prev)}
-            className="flex w-full items-center gap-1.5 rounded px-2 py-1 hover:bg-neutral-700"
-          >
-            <FileIcon
-              filename={isFolderOpen ? "folderOpen" : "folder"}
-              className="w-4"
-            />
-            <span>{name}</span>
-          </button>
+            iconName={isFolderOpen ? "folderOpen" : "folder"}
+            name={name}
+          />
         </li>
       )}
 
@@ -42,10 +38,7 @@ const Explorer = ({ files, name }: Props) => {
             {file.type === "folder" ? (
               <Explorer files={file.children} name={file.name} />
             ) : (
-              <button className="flex w-full items-center gap-1.5 rounded px-2 py-1 hover:bg-neutral-700">
-                <FileIcon filename={file.name} className="w-4" />
-                <span>{file.name}</span>
-              </button>
+              <TabButton iconName={file.name} name={file.name} />
             )}
           </li>
         ))}
