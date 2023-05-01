@@ -21,6 +21,7 @@
     ],
     "paths": {
       "@/*": ["./common/*"],
+      "@/ui/*": ["./common/components/ui/*"],
       "@/standalone/*": ["./common/components/standalone/*"],
       "@/layout/*": ["./common/components/layout/*"]
     }
