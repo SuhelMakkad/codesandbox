@@ -62,6 +62,19 @@ const files: File[] = [
   },
 ];
 
+const activeFiles = [
+  {
+    name: "index.tsx",
+  },
+  {
+    name: "index.scss",
+    isActive: true,
+  },
+  {
+    name: "logo.svg",
+  },
+];
+
 export default function CodePage() {
   return (
     <div>
@@ -82,11 +95,10 @@ export default function CodePage() {
 
         <Panel className="h-screen" minSize={50}>
           <PanelGroup direction="vertical">
-            <FileTabs className="h-[2rem]" />
+            <FileTabs files={activeFiles} />
 
             <Panel minSize={50} defaultSize={80}>
               <Editor
-                className="h-screen"
                 defaultLanguage="javascript"
                 theme="vs-dark"
                 defaultValue={"span"}

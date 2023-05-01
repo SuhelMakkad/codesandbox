@@ -11,7 +11,7 @@ const PanelResizeHandle = ({ direction, className, ...props }: Props) => {
     <PanelResize
       {...props}
       className={`${className} ${
-        direction === "vertical" ? "h-[0.2rem]" : "w-[0.2rem]"
+        direction === "vertical" ? "h-[2px]" : "w-[2px]"
       } bg-neutral-700 transition-[background-color] hover:bg-blue-300 data-[resize-handle-active]:bg-blue-300`}
     />
   );
