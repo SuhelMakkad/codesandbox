@@ -38,7 +38,7 @@ const TabButton = ({
   return (
     <button
       {...props}
-      className={`group flex w-full items-center gap-1.5 rounded px-2 py-1 hover:bg-neutral-700 focus-visible:bg-neutral-700 ${
+      className={`group flex w-full items-center gap-1 rounded px-2 py-1 text-neutral-300 hover:bg-neutral-700 hover:text-white focus-visible:bg-neutral-900 ${
         type === "folder" ? "" : "pl-7"
       }`}
     >
@@ -46,12 +46,12 @@ const TabButton = ({
         <IoIosArrowDown
           className={`${
             isActive ? "" : "-rotate-90"
-          } w-4 shrink-0 transition-transform`}
+          } shrink-0 transition-transform`}
         />
       )}
 
       <FileIcon filename={iconName} className="w-4 shrink-0" />
-      <span>{name}</span>
+      <span className="ml-0.5">{name}</span>
 
       <div className="ml-auto hidden gap-1.5 group-hover:flex">
         {trailingIconBtns &&

@@ -20,7 +20,9 @@ const Accordion = ({ label, children }: Props) => {
         onClick={() => setIsActive((prev) => !prev)}
       >
         <IoIosArrowDown
-          className={`${isActive ? "" : "-rotate-90"} transition-transform`}
+          className={`${
+            isActive ? "" : "-rotate-90"
+          } shrink-0 transition-transform`}
         />
         {label}
       </button>
