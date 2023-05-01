@@ -34,7 +34,7 @@ export default function CodePage() {
           <PanelResizeHandle direction="vertical" />
 
           <Panel minSize={0} defaultSize={18}>
-            <Xterm data="Hello from \x1B[1;3;31mxterm.js\x1B[0m $ " />
+            <Xterm />
           </Panel>
         </PanelGroup>
       </Panel>
