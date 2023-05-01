@@ -1,7 +1,9 @@
 "use client;";
 
 import { useState } from "react";
-import FileIcon from "@/ui/FileIcon";
+
+import { VscNewFolder, VscNewFile, VscTrash } from "react-icons/vsc";
+
 import TabButton from "./TabButton";
 
 export type File = {
@@ -21,13 +23,27 @@ const Explorer = ({ files, name }: Props) => {
   if (!files) return <></>;
 
   return (
-    <ul className="flex flex-col text-sm text-neutral-200">
+    <ul className="flex flex-col text-xs text-neutral-200">
       {name && (
         <li>
           <TabButton
             onClick={() => setIsFolderOpen((prev) => !prev)}
             iconName={isFolderOpen ? "folderOpen" : "folder"}
             name={name}
+            trailingIconBtns={[
+              {
+                icon: <VscNewFile />,
+                onClick: () => console.log("new file"),
+              },
+              {
+                icon: <VscNewFolder />,
+                onClick: () => console.log("new folder"),
+              },
+              {
+                icon: <VscTrash />,
+                onClick: () => console.log("delete"),
+              },
+            ]}
           />
         </li>
       )}
@@ -37,7 +53,16 @@ const Explorer = ({ files, name }: Props) => {
           {file.type === "folder" ? (
             <Explorer files={file.children} name={file.name} />
           ) : (
-            <TabButton iconName={file.name} name={file.name} />
+            <TabButton
+              iconName={file.name}
+              name={file.name}
+              trailingIconBtns={[
+                {
+                  icon: <VscTrash />,
+                  onClick: () => console.log("delete"),
+                },
+              ]}
+            />
           )}
         </li>
       ))}
