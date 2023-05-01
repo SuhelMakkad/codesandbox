@@ -15,9 +15,10 @@ export type File = {
 export type Props = {
   files?: File[];
   name?: string;
+  isFirst?: boolean;
 };
 
-const Explorer = ({ files, name }: Props) => {
+const Explorer = ({ files, name, isFirst }: Props) => {
   const [isFolderOpen, setIsFolderOpen] = useState(true);
 
   if (!files) return <></>;
@@ -49,7 +50,10 @@ const Explorer = ({ files, name }: Props) => {
       )}
 
       {files.map((file) => (
-        <li className={`${isFolderOpen ? "" : "hidden"} pl-2`} key={file.name}>
+        <li
+          className={`${isFolderOpen ? "" : "hidden"} ${isFirst ? "" : "pl-2"}`}
+          key={file.name}
+        >
           {file.type === "folder" ? (
             <Explorer files={file.children} name={file.name} />
           ) : (

@@ -3,10 +3,13 @@
 import Editor from "@monaco-editor/react";
 import { Panel, PanelGroup } from "react-resizable-panels";
 
-import Explorer, { File } from "@/standalone/Explorer";
+import Explorer from "@/standalone/Explorer";
 import FileTabs from "@/standalone/FileTabs";
 import PanelResizeHandle from "@/standalone/PanelResizeHandle";
-import Xterm from "@/components/standalone/Xterm";
+import Xterm from "@/standalone/Xterm";
+import Accordion from "@/standalone/Accordion";
+
+import type { File } from "@/standalone/Explorer";
 
 const files: File[] = [
   {
@@ -61,34 +64,43 @@ const files: File[] = [
 
 export default function CodePage() {
   return (
-    <PanelGroup direction="horizontal">
-      <Panel minSize={0} defaultSize={20}>
-        <Explorer files={files} />
-      </Panel>
+    <div>
+      <div className="flex border-b border-b-neutral-600 py-2 text-sm">
+        <span className="flex-grow text-center text-neutral-300">
+          My Playground
+        </span>
+      </div>
 
-      <PanelResizeHandle direction="horizontal" />
+      <PanelGroup direction="horizontal">
+        <Panel minSize={0} defaultSize={20}>
+          <Accordion label="code">
+            <Explorer files={files} isFirst={true} />
+          </Accordion>
+        </Panel>
 
-      <Panel className="h-screen" minSize={50}>
-        <PanelGroup direction="vertical">
-          <FileTabs className="h-[2rem]" />
+        <PanelResizeHandle direction="horizontal" />
 
-          <Panel minSize={50} defaultSize={80}>
-            <Editor
-              className="h-screen"
-              height={"100vh"}
-              defaultLanguage="javascript"
-              theme="vs-dark"
-              defaultValue={"span"}
-            />
-          </Panel>
+        <Panel className="h-screen" minSize={50}>
+          <PanelGroup direction="vertical">
+            <FileTabs className="h-[2rem]" />
 
-          <PanelResizeHandle direction="vertical" />
+            <Panel minSize={50} defaultSize={80}>
+              <Editor
+                className="h-screen"
+                defaultLanguage="javascript"
+                theme="vs-dark"
+                defaultValue={"span"}
+              />
+            </Panel>
 
-          <Panel minSize={0} defaultSize={18}>
-            <Xterm />
-          </Panel>
-        </PanelGroup>
-      </Panel>
-    </PanelGroup>
+            <PanelResizeHandle direction="vertical" />
+
+            <Panel minSize={0} defaultSize={18}>
+              <Xterm />
+            </Panel>
+          </PanelGroup>
+        </Panel>
+      </PanelGroup>
+    </div>
   );
 }
