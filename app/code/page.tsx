@@ -1,10 +1,12 @@
 "use client";
 
 import Editor from "@monaco-editor/react";
-import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import { Panel, PanelGroup } from "react-resizable-panels";
 
 import Explorer from "@/standalone/Explorer";
 import FileTabs from "@/standalone/FileTabs";
+import PanelResizeHandle from "@/standalone/PanelResizeHandle";
+import Xterm from "@/components/standalone/Xterm";
 
 export default function CodePage() {
   return (
@@ -13,18 +15,28 @@ export default function CodePage() {
         <Explorer />
       </Panel>
 
-      <PanelResizeHandle className="w-[0.2rem] bg-neutral-700 transition-[background-color] hover:bg-blue-300 data-[resize-handle-active]:bg-blue-300" />
+      <PanelResizeHandle direction="horizontal" />
 
-      <Panel minSize={50}>
-        <FileTabs className="h-[2rem]" />
+      <Panel className="h-screen" minSize={50}>
+        <PanelGroup direction="vertical">
+          <FileTabs className="h-[2rem]" />
 
-        <Editor
-          className="h-screen"
-          height={"calc(100vh - 2rem)"}
-          defaultLanguage="javascript"
-          theme="vs-dark"
-          defaultValue={"span"}
-        />
+          <Panel minSize={50} defaultSize={80}>
+            <Editor
+              className="h-screen"
+              height={"100vh"}
+              defaultLanguage="javascript"
+              theme="vs-dark"
+              defaultValue={"span"}
+            />
+          </Panel>
+
+          <PanelResizeHandle direction="vertical" />
+
+          <Panel minSize={0} defaultSize={18}>
+            <Xterm data="Hello from \x1B[1;3;31mxterm.js\x1B[0m $ " />
+          </Panel>
+        </PanelGroup>
       </Panel>
     </PanelGroup>
   );

@@ -1,5 +1,5 @@
 const Explorer = () => {
-  return <div>E</div>;
+  return <div>Explorer</div>;
 };
 
 export default Explorer;
