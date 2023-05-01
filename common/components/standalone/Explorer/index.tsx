@@ -28,9 +28,11 @@ const Explorer = ({ files, name, isFirst }: Props) => {
       {name && (
         <li>
           <TabButton
-            onClick={() => setIsFolderOpen((prev) => !prev)}
-            iconName={isFolderOpen ? "folderOpen" : "folder"}
             name={name}
+            isActive={isFolderOpen}
+            iconName={isFolderOpen ? "folderOpen" : "folder"}
+            type={"folder"}
+            onClick={() => setIsFolderOpen((prev) => !prev)}
             trailingIconBtns={[
               {
                 icon: <VscNewFile />,
@@ -58,6 +60,7 @@ const Explorer = ({ files, name, isFirst }: Props) => {
             <Explorer files={file.children} name={file.name} />
           ) : (
             <TabButton
+              type={"file"}
               iconName={file.name}
               name={file.name}
               trailingIconBtns={[
