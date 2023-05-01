@@ -16,7 +16,7 @@ const Accordion = ({ label, children }: Props) => {
   return (
     <div className="flex flex-col">
       <button
-        className="flex items-center gap-2 border-b border-b-neutral-600 px-2 py-1 text-sm capitalize"
+        className="flex items-center gap-2 border-b border-b-neutral-600 px-2 py-1 text-xs uppercase"
         onClick={() => setIsActive((prev) => !prev)}
       >
         <IoIosArrowDown
