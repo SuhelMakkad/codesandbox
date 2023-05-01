@@ -5,11 +5,7 @@ import { FitAddon } from "xterm-addon-fit";
 
 import "xterm/css/xterm.css";
 
-export type Props = {
-  data: string;
-};
-
-const Xterm = ({ data }: Props) => {
+const Xterm = () => {
   const divRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
