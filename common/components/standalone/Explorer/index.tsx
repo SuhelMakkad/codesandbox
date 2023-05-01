@@ -32,16 +32,15 @@ const Explorer = ({ files, name }: Props) => {
         </li>
       )}
 
-      {isFolderOpen &&
-        files.map((file) => (
-          <li className="pl-2 " key={file.name}>
-            {file.type === "folder" ? (
-              <Explorer files={file.children} name={file.name} />
-            ) : (
-              <TabButton iconName={file.name} name={file.name} />
-            )}
-          </li>
-        ))}
+      {files.map((file) => (
+        <li className={`${isFolderOpen ? "" : "hidden"} pl-2`} key={file.name}>
+          {file.type === "folder" ? (
+            <Explorer files={file.children} name={file.name} />
+          ) : (
+            <TabButton iconName={file.name} name={file.name} />
+          )}
+        </li>
+      ))}
     </ul>
   );
 };

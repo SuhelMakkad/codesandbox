@@ -26,6 +26,10 @@ const files: File[] = [
             type: "file",
           },
           {
+            name: "Header.scss",
+            type: "file",
+          },
+          {
             name: "Body.tsx",
             type: "file",
           },
@@ -39,7 +43,15 @@ const files: File[] = [
         name: "index.tsx",
         type: "file",
       },
+      {
+        name: "index.scss",
+        type: "file",
+      },
     ],
+  },
+  {
+    name: "favicon.ico",
+    type: "file",
   },
   {
     name: "package.json",
