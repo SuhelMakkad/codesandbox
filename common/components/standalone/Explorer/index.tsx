@@ -1,10 +1,11 @@
-"use client;";
+"use client";
 
 import { useState } from "react";
 
 import { VscNewFolder, VscNewFile, VscTrash } from "react-icons/vsc";
 
 import TabButton from "./TabButton";
+import AnimateHeight from "@/components/ui/AnimateHeight";
 
 export type File = {
   name: string;
@@ -24,7 +25,7 @@ const Explorer = ({ files, name, isFirst }: Props) => {
   if (!files) return <></>;
 
   return (
-    <ul className="flex flex-col text-xs text-neutral-200">
+    <ul className="flex flex-col text-sm text-neutral-200">
       {name && (
         <li>
           <TabButton
@@ -52,25 +53,24 @@ const Explorer = ({ files, name, isFirst }: Props) => {
       )}
 
       {files.map((file) => (
-        <li
-          className={`${isFolderOpen ? "" : "hidden"} ${isFirst ? "" : "pl-2"}`}
-          key={file.name}
-        >
-          {file.type === "folder" ? (
-            <Explorer files={file.children} name={file.name} />
-          ) : (
-            <TabButton
-              type={"file"}
-              iconName={file.name}
-              name={file.name}
-              trailingIconBtns={[
-                {
-                  icon: <VscTrash />,
-                  onClick: () => console.log("delete"),
-                },
-              ]}
-            />
-          )}
+        <li className={`${isFirst ? "" : "pl-2"}`} key={file.name}>
+          <AnimateHeight isActive={isFolderOpen}>
+            {file.type === "folder" ? (
+              <Explorer files={file.children} name={file.name} />
+            ) : (
+              <TabButton
+                type={"file"}
+                iconName={file.name}
+                name={file.name}
+                trailingIconBtns={[
+                  {
+                    icon: <VscTrash />,
+                    onClick: () => console.log("delete"),
+                  },
+                ]}
+              />
+            )}
+          </AnimateHeight>
         </li>
       ))}
     </ul>

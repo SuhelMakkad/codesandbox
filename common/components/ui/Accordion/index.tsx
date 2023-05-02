@@ -5,6 +5,8 @@ import type { ReactElement } from "react";
 
 import { IoIosArrowDown } from "react-icons/io";
 
+import AnimateHeight from "@/ui/AnimateHeight";
+
 export type Props = {
   label: string;
   children?: ReactElement | ReactElement[];
@@ -27,7 +29,7 @@ const Accordion = ({ label, children }: Props) => {
         {label}
       </button>
 
-      {isActive ? children : ""}
+      <AnimateHeight isActive={isActive}>{children}</AnimateHeight>
     </div>
   );
 };

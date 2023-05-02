@@ -7,7 +7,7 @@ import Explorer from "@/standalone/Explorer";
 import FileTabs from "@/standalone/FileTabs";
 import PanelResizeHandle from "@/standalone/PanelResizeHandle";
 import Xterm from "@/standalone/Xterm";
-import Accordion from "@/standalone/Accordion";
+import Accordion from "@/ui/Accordion";
 
 import type { File } from "@/standalone/Explorer";
 

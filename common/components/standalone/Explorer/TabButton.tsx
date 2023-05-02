@@ -38,8 +38,8 @@ const TabButton = ({
   return (
     <button
       {...props}
-      className={`group flex w-full items-center gap-1 rounded px-2 py-1 text-neutral-300 hover:bg-neutral-700 hover:text-white focus-visible:bg-neutral-900 ${
-        type === "folder" ? "" : "pl-7"
+      className={`group flex w-full items-center gap-1 rounded px-2 py-[0.2rem] text-neutral-300 hover:bg-neutral-700 hover:text-white focus-visible:bg-neutral-900 ${
+        type === "folder" ? "" : "pl-6"
       }`}
     >
       {type === "folder" && (
