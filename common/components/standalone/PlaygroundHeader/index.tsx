@@ -19,7 +19,7 @@ const PlaygroundHeader = ({ name }: Props) => {
         </h1>
       </Link>
 
-      <div className="flex items-center gap-1 text-neutral-400">
+      <div className="flex items-center gap-1 text-neutral-400 transition-[color] hover:text-white">
         <RiCheckDoubleLine className="shrink-0 text-lg" />
         <span>Saved</span>
       </div>

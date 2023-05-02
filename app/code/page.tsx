@@ -103,7 +103,7 @@ export default function CodePage() {
                 <Editor
                   defaultLanguage="javascript"
                   theme="vs-dark"
-                  defaultValue={"span"}
+                  defaultValue={"console.log('wassup world')"}
                 />
               </Panel>
 
