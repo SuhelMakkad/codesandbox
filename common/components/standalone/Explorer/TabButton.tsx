@@ -51,7 +51,7 @@ const TabButton = ({
       )}
 
       <FileIcon filename={iconName} className="w-4 shrink-0" />
-      <span className="ml-0.5">{name}</span>
+      <span className="ml-0.5 overflow-ellipsis">{name}</span>
 
       <div className="ml-auto hidden gap-1.5 group-hover:flex">
         {trailingIconBtns &&
