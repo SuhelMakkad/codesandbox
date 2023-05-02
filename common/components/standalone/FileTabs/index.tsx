@@ -17,27 +17,21 @@ const FileTabs = ({ files }: Props) => {
   if (!files) return <></>;
 
   return (
-    <nav>
-      <ol className="flex text-sm">
-        {files.map((file, index) => (
-          <li
-            key={file.name}
-            className={`relative transition-[background-color,color,opacity] duration-100 after:absolute after:left-0 after:right-0 after:top-0 after:h-[2px] after:bg-blue-400 after:transition-opacity ${
-              index === activeIndex
-                ? "bg-transparent text-white after:opacity-100"
-                : "bg-neutral-800 text-neutral-400 after:opacity-0  hover:bg-neutral-700/25 hover:text-neutral-200"
-            } ${index === files.length - 1 ? "border-r-0" : ""}`}
-          >
-            <button
-              onClick={() => setActiveIndex(index)}
-              className="flex items-center gap-2 px-4 py-1.5"
-            >
-              <FileIcon filename={file.name} className="w-4 shrink-0" />
-              {file.name}
-            </button>
-          </li>
-        ))}
-      </ol>
+    <nav className="flex text-sm">
+      {files.map((file, index) => (
+        <button
+          key={file.name}
+          onClick={() => setActiveIndex(index)}
+          className={` relative flex items-center gap-2 px-4 py-1.5 transition-[background-color,color,opacity] duration-100 after:absolute after:left-0 after:right-0 after:top-0 after:h-[2px] after:bg-blue-400 after:transition-opacity ${
+            index === activeIndex
+              ? "bg-transparent text-white after:opacity-100"
+              : "bg-neutral-800 text-neutral-400 after:opacity-0  hover:bg-neutral-700/25 hover:text-neutral-200"
+          } ${index === files.length - 1 ? "border-r-0" : ""}`}
+        >
+          <FileIcon filename={file.name} className="w-4 shrink-0" />
+          {file.name}
+        </button>
+      ))}
     </nav>
   );
 };
