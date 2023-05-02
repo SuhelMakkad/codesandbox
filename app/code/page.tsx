@@ -3,6 +3,7 @@
 import Editor from "@monaco-editor/react";
 import { Panel, PanelGroup } from "react-resizable-panels";
 
+import SideTabSelectorNav from "@/standalone/SideTabSelectorNa";
 import Explorer from "@/standalone/Explorer";
 import FileTabs from "@/standalone/FileTabs";
 import PanelResizeHandle from "@/standalone/PanelResizeHandle";
@@ -10,7 +11,6 @@ import Xterm from "@/standalone/Xterm";
 import Accordion from "@/ui/Accordion";
 
 import type { File } from "@/standalone/Explorer";
-import SideTabSelectorNav from "@/components/standalone/SideTabSelectorNa";
 
 const files: File[] = [
   {
