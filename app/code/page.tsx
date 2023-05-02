@@ -10,6 +10,7 @@ import Xterm from "@/standalone/Xterm";
 import Accordion from "@/ui/Accordion";
 
 import type { File } from "@/standalone/Explorer";
+import SideTabSelectorNav from "@/components/standalone/SideTabSelectorNa";
 
 const files: File[] = [
   {
@@ -84,35 +85,39 @@ export default function CodePage() {
         </span>
       </div>
 
-      <PanelGroup direction="horizontal">
-        <Panel minSize={0} defaultSize={20}>
-          <Accordion label="code">
-            <Explorer files={files} isFirst={true} />
-          </Accordion>
-        </Panel>
+      <div className="flex">
+        <SideTabSelectorNav />
 
-        <PanelResizeHandle direction="horizontal" />
+        <PanelGroup direction="horizontal">
+          <Panel minSize={0} defaultSize={20}>
+            <Accordion label="code">
+              <Explorer files={files} isFirst={true} />
+            </Accordion>
+          </Panel>
 
-        <Panel className="h-screen" minSize={50}>
-          <PanelGroup direction="vertical">
-            <FileTabs files={activeFiles} />
+          <PanelResizeHandle direction="horizontal" />
 
-            <Panel minSize={50} defaultSize={80}>
-              <Editor
-                defaultLanguage="javascript"
-                theme="vs-dark"
-                defaultValue={"span"}
-              />
-            </Panel>
+          <Panel className="h-screen" minSize={50}>
+            <PanelGroup direction="vertical">
+              <FileTabs files={activeFiles} />
 
-            <PanelResizeHandle direction="vertical" />
+              <Panel minSize={50} defaultSize={80}>
+                <Editor
+                  defaultLanguage="javascript"
+                  theme="vs-dark"
+                  defaultValue={"span"}
+                />
+              </Panel>
 
-            <Panel minSize={0} defaultSize={18}>
-              <Xterm />
-            </Panel>
-          </PanelGroup>
-        </Panel>
-      </PanelGroup>
+              <PanelResizeHandle direction="vertical" />
+
+              <Panel minSize={0} defaultSize={18}>
+                <Xterm />
+              </Panel>
+            </PanelGroup>
+          </Panel>
+        </PanelGroup>
+      </div>
     </div>
   );
 }
