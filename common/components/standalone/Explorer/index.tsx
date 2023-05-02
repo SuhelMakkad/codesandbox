@@ -4,8 +4,9 @@ import { useState } from "react";
 
 import { VscNewFolder, VscNewFile, VscTrash } from "react-icons/vsc";
 
+import AnimateHeight from "@/ui/AnimateHeight";
+
 import TabButton from "./TabButton";
-import AnimateHeight from "@/components/ui/AnimateHeight";
 
 export type File = {
   name: string;
