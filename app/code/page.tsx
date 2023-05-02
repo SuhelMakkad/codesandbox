@@ -3,6 +3,7 @@
 import Editor from "@monaco-editor/react";
 import { Panel, PanelGroup } from "react-resizable-panels";
 
+import PlaygroundHeader from "@/standalone/PlaygroundHeader";
 import SideTabSelectorNav from "@/standalone/SideTabSelectorNa";
 import Explorer from "@/standalone/Explorer";
 import FileTabs from "@/standalone/FileTabs";
@@ -79,11 +80,7 @@ const activeFiles = [
 export default function CodePage() {
   return (
     <div>
-      <div className="flex border-b border-b-neutral-600 py-2 text-sm">
-        <span className="flex-grow text-center text-neutral-300">
-          My Playground
-        </span>
-      </div>
+      <PlaygroundHeader name="My Playground" />
 
       <div className="flex">
         <SideTabSelectorNav />
