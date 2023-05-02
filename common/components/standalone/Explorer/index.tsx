@@ -5,13 +5,13 @@ import { useState } from "react";
 import { VscNewFolder, VscNewFile, VscTrash } from "react-icons/vsc";
 
 import AnimateHeight from "@/ui/AnimateHeight";
-
 import TabButton from "./TabButton";
 
 export type File = {
   name: string;
   type: "folder" | "file";
   children?: File[];
+  isActive?: boolean;
 };
 
 export type Props = {

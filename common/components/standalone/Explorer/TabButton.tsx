@@ -2,7 +2,7 @@ import { HTMLAttributes, MouseEvent, ReactElement } from "react";
 
 import { IoIosArrowDown } from "react-icons/io";
 
-import FileIcon from "@/components/ui/FileIcon";
+import FileIcon from "@/ui/FileIcon";
 
 export type TrailingIconBtn = {
   icon: ReactElement;
@@ -38,7 +38,7 @@ const TabButton = ({
   return (
     <button
       {...props}
-      className={`group flex w-full items-center gap-1 rounded px-2 py-[0.2rem] text-neutral-300 hover:bg-neutral-700 hover:text-white focus-visible:bg-neutral-900 ${
+      className={`group flex w-full items-center gap-1 rounded px-2 py-[0.2rem] text-neutral-300 hover:bg-neutral-800 hover:text-white focus-visible:bg-neutral-900 ${
         type === "folder" ? "" : "pl-6"
       }`}
     >

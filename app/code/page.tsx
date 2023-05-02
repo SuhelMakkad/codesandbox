@@ -47,6 +47,7 @@ const files: File[] = [
       {
         name: "index.tsx",
         type: "file",
+        isActive: true,
       },
       {
         name: "index.scss",
