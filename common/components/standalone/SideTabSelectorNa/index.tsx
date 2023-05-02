@@ -21,6 +21,7 @@ const SideTabSelectorNav = () => {
     <nav className="flex flex-col border-r border-r-neutral-600 bg-neutral-800 text-2xl text-neutral-400">
       {buttons.map((button, index) => (
         <button
+          key={index}
           onClick={() => setActiveIndex(index)}
           className={`relative px-2.5 py-3 transition-[color] after:absolute after:bottom-0 after:left-0 after:top-0 after:w-[2px] after:bg-white after:transition-opacity ${
             index === activeIndex
