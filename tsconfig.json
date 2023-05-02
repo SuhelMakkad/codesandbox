@@ -20,7 +20,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./common/*"],
+      "@/utils/*": ["./common/utils*"],
       "@/ui/*": ["./common/components/ui/*"],
       "@/standalone/*": ["./common/components/standalone/*"],
       "@/layout/*": ["./common/components/layout/*"]
