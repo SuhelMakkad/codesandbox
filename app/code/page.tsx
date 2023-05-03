@@ -9,11 +9,10 @@ import Explorer from "@/standalone/Explorer";
 import FileTabs from "@/standalone/FileTabs";
 import PanelResizeHandle from "@/standalone/PanelResizeHandle";
 import Xterm from "@/standalone/Xterm";
-import Accordion from "@/ui/Accordion";
 import PreviewWindow from "@/standalone/PreviewIWindow";
 import WindowController from "@/standalone/WindowController";
 
-import type { File } from "@/standalone/Explorer";
+import type { File } from "@/ui/FolderExplorer";
 
 const files: File[] = [
   {
@@ -90,9 +89,7 @@ export default function CodePage() {
 
         <PanelGroup direction="horizontal">
           <Panel minSize={0} defaultSize={20}>
-            <Accordion label="code">
-              <Explorer files={files} isFirst={true} />
-            </Accordion>
+            <Explorer files={files} />
           </Panel>
 
           <PanelResizeHandle direction="horizontal" />

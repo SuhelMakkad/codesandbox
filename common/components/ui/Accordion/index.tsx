@@ -8,7 +8,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import AnimateHeight from "@/ui/AnimateHeight";
 
 export type Props = {
-  label: string;
+  label: string | ReactElement | ReactElement[];
   children?: ReactElement | ReactElement[];
 };
 
@@ -17,17 +17,20 @@ const Accordion = ({ label, children }: Props) => {
 
   return (
     <div className="flex flex-col">
-      <button
+      <span
         className="flex items-center gap-2 border-b border-b-neutral-600 px-2 py-1 text-xs uppercase"
         onClick={() => setIsActive((prev) => !prev)}
       >
-        <IoIosArrowDown
-          className={`${
-            isActive ? "" : "-rotate-90"
-          } shrink-0 transition-transform`}
-        />
-        {label}
-      </button>
+        <button>
+          <IoIosArrowDown
+            className={`${
+              isActive ? "" : "-rotate-90"
+            } shrink-0 transition-transform`}
+          />
+        </button>
+
+        <div className="grow">{label}</div>
+      </span>
 
       <AnimateHeight isActive={isActive}>{children}</AnimateHeight>
     </div>
