@@ -10,6 +10,7 @@ import FileTabs from "@/standalone/FileTabs";
 import PanelResizeHandle from "@/standalone/PanelResizeHandle";
 import Xterm from "@/standalone/Xterm";
 import Accordion from "@/ui/Accordion";
+import PreviewWindow from "@/standalone/PreviewIWindow";
 import WindowController from "@/standalone/WindowController";
 
 import type { File } from "@/standalone/Explorer";
@@ -96,7 +97,7 @@ export default function CodePage() {
 
           <PanelResizeHandle direction="horizontal" />
 
-          <Panel className="h-screen" minSize={50}>
+          <Panel className="h-screen" minSize={0}>
             <PanelGroup direction="vertical">
               <FileTabs files={activeFiles} />
 
@@ -114,6 +115,12 @@ export default function CodePage() {
                 <Xterm />
               </Panel>
             </PanelGroup>
+          </Panel>
+
+          <PanelResizeHandle direction="horizontal" />
+
+          <Panel className="h-screen" minSize={0}>
+            <PreviewWindow />
           </Panel>
         </PanelGroup>
       </div>
