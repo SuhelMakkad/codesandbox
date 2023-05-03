@@ -101,20 +101,20 @@ const activeFiles = [
 
 export default function CodePage() {
   return (
-    <div>
+    <div className="flex min-h-screen flex-col">
       <PlaygroundHeader name="My Playground" />
 
-      <div className="flex">
+      <div className="flex grow">
         <SideTabSelectorNav />
 
-        <PanelGroup direction="horizontal">
+        <PanelGroup direction="horizontal" className="!h-auto grow">
           <Panel minSize={0} defaultSize={20}>
             <Explorer files={files} />
           </Panel>
 
           <PanelResizeHandle direction="horizontal" />
 
-          <Panel className="h-screen" minSize={0}>
+          <Panel minSize={0}>
             <PanelGroup direction="vertical">
               <FileTabs files={activeFiles} />
 
@@ -136,7 +136,7 @@ export default function CodePage() {
 
           <PanelResizeHandle direction="horizontal" />
 
-          <Panel className="h-screen" minSize={0}>
+          <Panel minSize={0}>
             <PreviewWindow />
           </Panel>
         </PanelGroup>
