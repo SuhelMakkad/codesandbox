@@ -10,6 +10,7 @@ import FileTabs from "@/standalone/FileTabs";
 import PanelResizeHandle from "@/standalone/PanelResizeHandle";
 import Xterm from "@/standalone/Xterm";
 import Accordion from "@/ui/Accordion";
+import WindowController from "@/standalone/WindowController";
 
 import type { File } from "@/standalone/Explorer";
 
@@ -116,6 +117,8 @@ export default function CodePage() {
           </Panel>
         </PanelGroup>
       </div>
+
+      <WindowController />
     </div>
   );
 }
