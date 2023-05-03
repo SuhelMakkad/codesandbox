@@ -9,9 +9,7 @@ import { MdHttps } from "react-icons/md";
 
 const PreviewWindow = () => {
   const frameRef = useRef<HTMLIFrameElement | null>(null);
-  const [frameSrc, setFrameSrc] = useState(
-    "https://suhelmakkad.github.io/fashion-landing-page/"
-  );
+  const [frameSrc, setFrameSrc] = useState("https://p2833n-4173.csb.app/");
 
   const reloadIframe = () => {
     if (!frameRef.current) return;
