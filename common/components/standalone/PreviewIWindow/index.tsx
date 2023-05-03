@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 
 import { FiRefreshCcw } from "react-icons/fi";
@@ -10,7 +10,7 @@ import { MdHttps } from "react-icons/md";
 const PreviewWindow = () => {
   const frameRef = useRef<HTMLIFrameElement | null>(null);
   const [frameSrc, setFrameSrc] = useState(
-    "https://suhelmakkad.github.io/studio-landing-page/"
+    "https://suhelmakkad.github.io/fashion-landing-page/"
   );
 
   const reloadIframe = () => {
@@ -20,6 +20,10 @@ const PreviewWindow = () => {
 
     frameRef.current.src = frameSrc;
   };
+
+  useEffect(() => {
+    if (frameRef.current) frameRef.current.src = frameSrc;
+  }, [frameRef]);
 
   return (
     <aside className="h-full w-full ">
@@ -33,7 +37,7 @@ const PreviewWindow = () => {
             <MdHttps />
           </button>
           <input
-            className="bg-transparent"
+            className="grow bg-transparent outline-none"
             type="text"
             value={frameSrc}
             onChange={(e) => setFrameSrc(e.target.value)}
