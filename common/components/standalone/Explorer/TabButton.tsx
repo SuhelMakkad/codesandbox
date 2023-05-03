@@ -59,7 +59,7 @@ const TabButton = ({
         trailingIconBtns.map((iconBtn, index) => (
           <span
             key={index}
-            className="ml-px hidden text-stone-200 group-hover:block"
+            className="ml-px hidden text-base text-stone-100 group-hover:block"
             onClick={(e) => handleTrialingBtnClick(e, index)}
           >
             {iconBtn.icon}
