@@ -20,11 +20,11 @@ const toggleButtons = [
 ];
 const WindowController = () => {
   return (
-    <footer className="mr-2 flex items-center justify-end border-b border-t border-neutral-600 text-sm">
+    <footer className="mr-2 flex items-center justify-end border-b border-t border-neutral-600 text-sm text-neutral-200">
       {toggleButtons.map((button) => (
         <button
           key={button.controlId}
-          className="px-2 py-1 capitalize hover:bg-gray-700"
+          className="px-2 py-1 capitalize transition-colors hover:bg-neutral-800 hover:text-neutral-50"
         >
           {button.label}
         </button>
