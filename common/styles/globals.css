@@ -5,3 +5,17 @@
 :root {
   color-scheme: dark;
 }
+
+*::-webkit-scrollbar-thumb {
+  background: gray;
+  cursor: pointer;
+}
+
+*::-webkit-scrollbar {
+  height: 3px;
+  width: 3px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #212121;
+}

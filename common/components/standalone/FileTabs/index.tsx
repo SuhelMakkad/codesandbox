@@ -25,7 +25,7 @@ const FileTabs = ({ files }: Props) => {
   if (!files) return <></>;
 
   return (
-    <nav className="flex text-sm">
+    <nav className="scroll-thin flex overflow-auto text-sm">
       {files.map((file, index) => (
         <button
           key={file.name}

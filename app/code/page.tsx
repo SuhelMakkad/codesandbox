@@ -77,6 +77,26 @@ const activeFiles = [
   {
     name: "logo.svg",
   },
+  {
+    name: "index.tsx",
+  },
+  {
+    name: "index.scss",
+    isActive: true,
+  },
+  {
+    name: "logo.svg",
+  },
+  {
+    name: "index.tsx",
+  },
+  {
+    name: "index.scss",
+    isActive: true,
+  },
+  {
+    name: "logo.svg",
+  },
 ];
 
 export default function CodePage() {
