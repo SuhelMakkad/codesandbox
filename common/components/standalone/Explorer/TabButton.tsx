@@ -51,20 +51,20 @@ const TabButton = ({
       )}
 
       <FileIcon filename={iconName} className="w-4 shrink-0" />
-      <span className="ml-0.5 overflow-ellipsis">{name}</span>
+      <span className="ml-0.5 grow truncate overflow-ellipsis text-start">
+        {name}
+      </span>
 
-      <div className="ml-auto hidden gap-1.5 group-hover:flex">
-        {trailingIconBtns &&
-          trailingIconBtns.map((iconBtn, index) => (
-            <span
-              key={index}
-              className="text-stone-200"
-              onClick={(e) => handleTrialingBtnClick(e, index)}
-            >
-              {iconBtn.icon}
-            </span>
-          ))}
-      </div>
+      {trailingIconBtns &&
+        trailingIconBtns.map((iconBtn, index) => (
+          <span
+            key={index}
+            className="ml-px hidden text-stone-200 group-hover:block"
+            onClick={(e) => handleTrialingBtnClick(e, index)}
+          >
+            {iconBtn.icon}
+          </span>
+        ))}
     </button>
   );
 };
