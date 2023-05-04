@@ -1,8 +1,20 @@
 "use client";
 
+// store
+import { Provider } from "react-redux";
+import { store } from "@/store/code";
+
+// context
+import {
+  PanelRefsContextProvider,
+  usePanelRefs,
+} from "@/context/PanelRefsContext";
+
+// components
 import Editor from "@monaco-editor/react";
 import { Panel, PanelGroup } from "react-resizable-panels";
 
+// default components
 import PlaygroundHeader from "@/standalone/PlaygroundHeader";
 import SideTabSelectorNav from "@/standalone/SideTabSelectorNa";
 import Explorer from "@/standalone/Explorer";
@@ -11,7 +23,6 @@ import PanelResizeHandle from "@/standalone/PanelResizeHandle";
 import Xterm from "@/standalone/Xterm";
 import PreviewWindow from "@/standalone/PreviewIWindow";
 import WindowController from "@/standalone/WindowController";
-
 import type { File } from "@/ui/FolderExplorer";
 
 const files: File[] = [
@@ -77,29 +88,17 @@ const activeFiles = [
   {
     name: "logo.svg",
   },
-  {
-    name: "index.tsx",
-  },
-  {
-    name: "index.scss",
-    isActive: true,
-  },
-  {
-    name: "logo.svg",
-  },
-  {
-    name: "index.tsx",
-  },
-  {
-    name: "index.scss",
-    isActive: true,
-  },
-  {
-    name: "logo.svg",
-  },
 ];
 
-export default function CodePage() {
+const CodePageContent = () => {
+  const {
+    explorerPanelRef,
+    codeGroupPanelRef,
+    monacoPanelRef,
+    consolePanelRef,
+    previewWindowPanelRef,
+  } = usePanelRefs();
+
   return (
     <div className="flex min-h-screen flex-col">
       <PlaygroundHeader name="My Playground" />
@@ -107,18 +106,28 @@ export default function CodePage() {
       <div className="flex grow">
         <SideTabSelectorNav />
 
-        <PanelGroup direction="horizontal" className="!h-auto grow">
-          <Panel minSize={0} defaultSize={20}>
+        <PanelGroup
+          disablePointerEventsDuringResize={true}
+          direction="horizontal"
+          className="!h-auto grow"
+        >
+          <Panel
+            ref={explorerPanelRef}
+            collapsible={true}
+            minSize={0}
+            maxSize={40}
+            defaultSize={20}
+          >
             <Explorer files={files} />
           </Panel>
 
           <PanelResizeHandle direction="horizontal" />
 
-          <Panel minSize={0}>
+          <Panel ref={codeGroupPanelRef} collapsible={true} minSize={0}>
             <PanelGroup direction="vertical">
               <FileTabs files={activeFiles} />
 
-              <Panel minSize={50} defaultSize={80}>
+              <Panel ref={monacoPanelRef} minSize={0} defaultSize={80}>
                 <Editor
                   defaultLanguage="javascript"
                   theme="vs-dark"
@@ -128,7 +137,12 @@ export default function CodePage() {
 
               <PanelResizeHandle direction="vertical" />
 
-              <Panel minSize={0} defaultSize={18}>
+              <Panel
+                ref={consolePanelRef}
+                collapsible={true}
+                minSize={0}
+                defaultSize={20}
+              >
                 <Xterm />
               </Panel>
             </PanelGroup>
@@ -136,7 +150,7 @@ export default function CodePage() {
 
           <PanelResizeHandle direction="horizontal" />
 
-          <Panel minSize={0}>
+          <Panel ref={previewWindowPanelRef} collapsible={true} minSize={0}>
             <PreviewWindow />
           </Panel>
         </PanelGroup>
@@ -144,5 +158,13 @@ export default function CodePage() {
 
       <WindowController />
     </div>
+  );
+};
+
+export default function CodePage() {
+  return (
+    <PanelRefsContextProvider>
+      <CodePageContent />
+    </PanelRefsContextProvider>
   );
 }

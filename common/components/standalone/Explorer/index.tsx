@@ -39,8 +39,12 @@ const Explorer = ({ files }: Props) => {
           <span className="font-semibold">code</span>
 
           <div className="flex gap-2 text-base transition-[color]">
-            {buttons.map((button) => (
-              <button title={button.label} className="hover:text-neutral-100">
+            {buttons.map((button, index) => (
+              <button
+                key={index}
+                title={button.label}
+                className="hover:text-neutral-100"
+              >
                 {button.icon}
               </button>
             ))}
