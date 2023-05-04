@@ -1,9 +1,5 @@
 "use client";
 
-// store
-import { Provider } from "react-redux";
-import { store } from "@/store/code";
-
 // context
 import {
   PanelRefsContextProvider,
