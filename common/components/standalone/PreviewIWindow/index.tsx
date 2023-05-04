@@ -19,6 +19,12 @@ const PreviewWindow = () => {
     frameRef.current.src = frameSrc;
   };
 
+  const doRefresh = () => {
+    if (!frameRef.current) return;
+
+    frameRef.current.src = frameRef.current.src;
+  };
+
   useEffect(() => {
     if (frameRef.current) frameRef.current.src = frameSrc;
   }, [frameRef]);
@@ -26,7 +32,10 @@ const PreviewWindow = () => {
   return (
     <aside className="h-full w-full ">
       <div className="flex gap-2 border-b border-neutral-600 bg-neutral-800 px-3 py-2 text-sm text-neutral-300">
-        <button className="aspect-square rounded-full px-1.5 py-1 leading-none transition-[background-color] hover:bg-neutral-700">
+        <button
+          onClick={doRefresh}
+          className="aspect-square rounded-full px-1.5 py-1 leading-none transition-[background-color] hover:bg-neutral-700"
+        >
           <FiRefreshCcw />
         </button>
 
