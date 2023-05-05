@@ -1,5 +1,9 @@
 "use client";
 
+// // store
+// import { Provider } from "react-redux";
+// import { store } from "@/store/code";
+
 // context
 import {
   PanelRefsContextProvider,
@@ -107,23 +111,17 @@ const CodePageContent = () => {
           direction="horizontal"
           className="!h-auto grow"
         >
-          <Panel
-            ref={explorerPanelRef}
-            collapsible={true}
-            minSize={0}
-            maxSize={40}
-            defaultSize={20}
-          >
+          <Panel ref={explorerPanelRef} defaultSize={20} minSize={0}>
             <Explorer files={files} />
           </Panel>
 
           <PanelResizeHandle direction="horizontal" />
 
-          <Panel ref={codeGroupPanelRef} collapsible={true} minSize={0}>
+          <Panel ref={codeGroupPanelRef} defaultSize={50} minSize={0}>
             <PanelGroup direction="vertical">
               <FileTabs files={activeFiles} />
 
-              <Panel ref={monacoPanelRef} minSize={0} defaultSize={80}>
+              <Panel ref={monacoPanelRef} defaultSize={70} minSize={0}>
                 <Editor
                   defaultLanguage="javascript"
                   theme="vs-dark"
@@ -133,12 +131,7 @@ const CodePageContent = () => {
 
               <PanelResizeHandle direction="vertical" />
 
-              <Panel
-                ref={consolePanelRef}
-                collapsible={true}
-                minSize={0}
-                defaultSize={20}
-              >
+              <Panel ref={consolePanelRef} defaultSize={30} minSize={0}>
                 <Xterm />
               </Panel>
             </PanelGroup>
@@ -146,7 +139,7 @@ const CodePageContent = () => {
 
           <PanelResizeHandle direction="horizontal" />
 
-          <Panel ref={previewWindowPanelRef} collapsible={true} minSize={0}>
+          <Panel ref={previewWindowPanelRef} defaultSize={30} minSize={0}>
             <PreviewWindow />
           </Panel>
         </PanelGroup>

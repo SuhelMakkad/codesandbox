@@ -10,57 +10,61 @@ const WindowController = () => {
     previewWindowPanelRef,
   } = usePanelRefs();
 
-  const collapseAll = () => {
-    explorerPanelRef.current?.resize(0);
-    codeGroupPanelRef.current?.resize(0);
-    previewWindowPanelRef.current?.resize(0);
-  };
-
-  const openAll = () => {
-    explorerPanelRef.current?.resize(20);
-    codeGroupPanelRef.current?.resize(50);
-    previewWindowPanelRef.current?.resize(30);
-    monacoPanelRef.current?.resize(70);
-    consolePanelRef.current?.resize(30);
-  };
-
-  const togglePanel = (panelRef: ContextValue, id: string) => {
-    if (!panelRef.current) return;
-
-    collapseAll();
-    const panel = panelRef.current;
-    if (id === "editor" || id === "console") {
-      codeGroupPanelRef.current?.resize(100);
-    }
-
-    panel.resize(100);
-  };
-
   const toggleButtons = [
     {
       id: "explorer",
       label: "explorer",
-      onClick: () => togglePanel(explorerPanelRef, "explorer"),
+      onClick: () => {
+        codeGroupPanelRef.current?.resize(0);
+        previewWindowPanelRef.current?.resize(0);
+
+        explorerPanelRef.current?.resize(100);
+      },
     },
     {
       id: "console",
       label: "terminal",
-      onClick: () => togglePanel(consolePanelRef, "terminal"),
+      onClick: () => {
+        previewWindowPanelRef.current?.resize(0);
+        explorerPanelRef.current?.resize(0);
+
+        monacoPanelRef.current?.resize(0);
+        codeGroupPanelRef.current?.resize(100);
+        consolePanelRef.current?.resize(100);
+      },
     },
     {
       id: "monaco",
       label: "editor",
-      onClick: () => togglePanel(monacoPanelRef, "monaco"),
+      onClick: () => {
+        previewWindowPanelRef.current?.resize(0);
+        explorerPanelRef.current?.resize(0);
+
+        consolePanelRef.current?.resize(0);
+        codeGroupPanelRef.current?.resize(100);
+        monacoPanelRef.current?.resize(100);
+      },
     },
     {
       id: "previewWindow",
       label: "browser",
-      onClick: () => togglePanel(previewWindowPanelRef, "previewWindow"),
+      onClick: () => {
+        explorerPanelRef.current?.resize(0);
+        consolePanelRef.current?.resize(0);
+
+        previewWindowPanelRef.current?.resize(100);
+      },
     },
     {
       id: "all",
       label: "all",
-      onClick: () => openAll(),
+      onClick: () => {
+        previewWindowPanelRef.current?.resize(30);
+        explorerPanelRef.current?.resize(20);
+        codeGroupPanelRef.current?.resize(50);
+        monacoPanelRef.current?.resize(70);
+        consolePanelRef.current?.resize(30);
+      },
     },
   ];
 
