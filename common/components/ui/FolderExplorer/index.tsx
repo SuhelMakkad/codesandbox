@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 
 import { VscNewFolder, VscNewFile, VscTrash } from "react-icons/vsc";
 
@@ -49,6 +49,57 @@ const Explorer = ({
     [files]
   );
 
+  const handleNewFileCreateSubmit = () => {
+    if (newFile.name) {
+      createNewFile(id, newFile.type!, newFile.name);
+    }
+
+    setIsFolderOpen(true);
+    setNewFile({
+      isVisible: false,
+      name: "",
+      type: "file",
+    });
+  };
+
+  const folderTrailingIconBtns = useMemo(
+    () => [
+      {
+        icon: <VscNewFile />,
+        onClick: () =>
+          setNewFile({
+            isVisible: true,
+            name: "",
+            type: "file",
+          }),
+      },
+      {
+        icon: <VscNewFolder />,
+        onClick: () =>
+          setNewFile({
+            isVisible: true,
+            name: "",
+            type: "folder",
+          }),
+      },
+      {
+        icon: <VscTrash />,
+        onClick: () => deleteFolder(id),
+      },
+    ],
+    [deleteFolder, newFile]
+  );
+
+  const getFileTrailingBtns = useCallback(
+    (id: string) => [
+      {
+        icon: <VscTrash />,
+        onClick: () => deleteFolder(id),
+      },
+    ],
+    [deleteFolder]
+  );
+
   return (
     <ul className="flex flex-col text-sm text-neutral-200">
       {/* Name of the folder or file */}
@@ -60,30 +111,7 @@ const Explorer = ({
             iconName={isFolderOpen ? "folderOpen" : "folder"}
             type={"folder"}
             onClick={() => setIsFolderOpen((prev) => !prev)}
-            trailingIconBtns={[
-              {
-                icon: <VscNewFile />,
-                onClick: () =>
-                  setNewFile({
-                    isVisible: true,
-                    name: "",
-                    type: "file",
-                  }),
-              },
-              {
-                icon: <VscNewFolder />,
-                onClick: () =>
-                  setNewFile({
-                    isVisible: true,
-                    name: "",
-                    type: "folder",
-                  }),
-              },
-              {
-                icon: <VscTrash />,
-                onClick: () => deleteFolder(id),
-              },
-            ]}
+            trailingIconBtns={folderTrailingIconBtns}
           />
         </li>
       )}
@@ -96,18 +124,7 @@ const Explorer = ({
             iconName={newFile.type === "folder" ? "folder" : newFile.name}
             type={newFile.type}
             setName={(name) => setNewFile((prev) => ({ ...prev, name }))}
-            submit={() => {
-              if (newFile.name) {
-                createNewFile(id, newFile.type!, newFile.name);
-              }
-
-              setIsFolderOpen(true);
-              setNewFile({
-                isVisible: false,
-                name: "",
-                type: "file",
-              });
-            }}
+            submit={handleNewFileCreateSubmit}
           />
         </li>
       )}
@@ -129,12 +146,7 @@ const Explorer = ({
                 type={"file"}
                 iconName={file.name}
                 name={file.name}
-                trailingIconBtns={[
-                  {
-                    icon: <VscTrash />,
-                    onClick: () => deleteFolder(file.id),
-                  },
-                ]}
+                trailingIconBtns={getFileTrailingBtns(file.id)}
               />
             )}
           </AnimateHeight>
