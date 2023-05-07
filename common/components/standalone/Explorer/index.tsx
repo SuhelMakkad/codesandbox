@@ -8,8 +8,7 @@ import {
   deleteFile,
 } from "@/store/code/slices/filesReferenceSlice";
 
-import { TbLayoutNavbarCollapse } from "react-icons/tb";
-import { VscNewFolder, VscNewFile } from "react-icons/vsc";
+import { VscNewFolder, VscNewFile, VscCloudDownload } from "react-icons/vsc";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 import Accordion from "@/ui/Accordion";
@@ -68,7 +67,7 @@ const Explorer = () => {
   const buttons = [
     {
       icon: <VscNewFile />,
-      label: "create new file",
+      label: "Create New File",
       onClick: (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         setNewFile({
@@ -80,7 +79,7 @@ const Explorer = () => {
     },
     {
       icon: <VscNewFolder />,
-      label: "create new folder",
+      label: "Create New Folder",
       onClick: (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
         setNewFile({
@@ -91,15 +90,8 @@ const Explorer = () => {
       },
     },
     {
-      icon: <TbLayoutNavbarCollapse />,
-      label: "collapse all open folders",
-      onClick: (e: MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation();
-      },
-    },
-    {
-      icon: <BsThreeDotsVertical />,
-      label: "more options",
+      icon: <VscCloudDownload />,
+      label: "Download Playground",
       onClick: (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
       },
