@@ -2,45 +2,49 @@
 
 import { MouseEvent, useState } from "react";
 
-import { VscChromeClose } from "react-icons/vsc";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectActiveFile,
+  closeActiveFile,
+} from "@/store/code/slices/activeFile";
 
+import { VscChromeClose } from "react-icons/vsc";
 import FileIcon from "@/ui/FileIcon";
 
-export type Props = {
-  files?: File[];
-};
+import type { RootState } from "@/store";
 
-export type File = {
-  name: string;
-  isActive?: boolean;
-};
-
-const FileTabs = ({ files }: Props) => {
+const FileTabs = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleClose = (e: MouseEvent, index: number) => {
+  const activeFiles = useSelector((state: RootState) => state.activeFiles);
+  const dispatch = useDispatch();
+
+  const handleClose = (e: MouseEvent, fileId: string) => {
     e.stopPropagation();
+    dispatch(closeActiveFile(fileId));
   };
 
-  if (!files) return <></>;
+  const { activeFiles: fileIds, selectedFileId } = activeFiles.value;
+
+  if (!fileIds) return <></>;
 
   return (
     <nav className="scroll-thin flex overflow-auto text-sm">
-      {files.map((file, index) => (
+      {fileIds.map((file, index) => (
         <button
-          key={file.name}
-          onClick={() => setActiveIndex(index)}
+          key={file}
+          onClick={() => dispatch(selectActiveFile(file))}
           className={`group relative flex items-center gap-2 py-2 pl-4 pr-3 transition-[background-color,color,opacity] duration-100 after:absolute after:left-0 after:right-0 after:top-0 after:h-[2px] after:bg-blue-400 after:transition-opacity ${
-            index === activeIndex
+            file === selectedFileId
               ? "bg-transparent text-white after:opacity-100"
               : "bg-neutral-800 text-neutral-400 after:opacity-0  hover:bg-neutral-700/25 hover:text-neutral-200"
           }`}
         >
-          <FileIcon filename={file.name} className="w-4 shrink-0" />
-          {file.name}
+          <FileIcon filename={file} className="w-4 shrink-0" />
+          {file}
 
           <div
-            onClick={(e) => handleClose(e, index)}
+            onClick={(e) => handleClose(e, file)}
             className="rounded p-1 opacity-0 hover:bg-neutral-600 group-hover:opacity-100"
           >
             <VscChromeClose />

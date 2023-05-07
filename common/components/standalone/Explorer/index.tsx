@@ -7,7 +7,10 @@ import {
   createFile,
   deleteFile,
 } from "@/store/code/slices/filesReferenceSlice";
-import { setActiveId } from "@/store/code/slices/activeFileId";
+import {
+  selectActiveFile,
+  closeActiveFile,
+} from "@/store/code/slices/activeFile";
 
 import { VscNewFolder, VscNewFile, VscCloudDownload } from "react-icons/vsc";
 
@@ -34,10 +37,9 @@ const Explorer = () => {
     type: "file",
   });
 
-  const { filesReference, activeFileId } = useSelector((state: RootState) => ({
-    filesReference: state.filesReference,
-    activeFileId: state.activeFileId,
-  }));
+  const filesReference = useSelector(
+    (state: RootState) => state.filesReference
+  );
   const dispatch = useDispatch();
 
   const createNewFile = (
@@ -46,16 +48,18 @@ const Explorer = () => {
     name: string
   ) => {
     const file: FileType = { id: uuid(), name, type };
+
     dispatch(createFile({ file, folderId }));
-    dispatch(setActiveId(file.id));
+    dispatch(selectActiveFile(file.id));
   };
 
   const deleteFolder = (fileId: string) => {
     dispatch(deleteFile(fileId));
+    dispatch(closeActiveFile(fileId));
   };
 
   const selectFile = (fileId: string) => {
-    dispatch(setActiveId(fileId));
+    dispatch(selectActiveFile(fileId));
   };
 
   const handleNewFileCreateSubmit = () => {

@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import filesReferenceReducer from "@/store/code/slices/filesReferenceSlice";
-import activeFileIdReducer from "@/store/code/slices/activeFileId";
+import activeFilesReducer from "@/store/code/slices/activeFile";
 
 export const store = configureStore({
   reducer: {
     filesReference: filesReferenceReducer,
-    activeFileId: activeFileIdReducer,
+    activeFiles: activeFilesReducer,
   },
 });
 

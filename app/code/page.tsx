@@ -24,21 +24,6 @@ import Xterm from "@/standalone/Xterm";
 import PreviewWindow from "@/standalone/PreviewIWindow";
 import WindowController from "@/standalone/WindowController";
 
-import type { FileType } from "@/store/code/slices/filesReferenceSlice";
-
-const activeFiles = [
-  {
-    name: "index.tsx",
-  },
-  {
-    name: "index.scss",
-    isActive: true,
-  },
-  {
-    name: "logo.svg",
-  },
-];
-
 const CodePageContent = () => {
   const {
     explorerPanelRef,
@@ -68,7 +53,7 @@ const CodePageContent = () => {
 
           <Panel ref={codeGroupPanelRef} defaultSize={50} minSize={0}>
             <PanelGroup direction="vertical">
-              <FileTabs files={activeFiles} />
+              <FileTabs />
 
               <Panel ref={monacoPanelRef} defaultSize={70} minSize={0}>
                 <Editor
