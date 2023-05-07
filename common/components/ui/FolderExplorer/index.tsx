@@ -51,11 +51,17 @@ const Explorer = ({
             trailingIconBtns={[
               {
                 icon: <VscNewFile />,
-                onClick: () => createNewFile(id, "file", "new file"),
+                onClick: () => {
+                  createNewFile(id, "file", "new file");
+                  setIsFolderOpen(true);
+                },
               },
               {
                 icon: <VscNewFolder />,
-                onClick: () => createNewFile(id, "folder", "new folder"),
+                onClick: () => {
+                  createNewFile(id, "folder", "new folder");
+                  setIsFolderOpen(true);
+                },
               },
               {
                 icon: <VscTrash />,
