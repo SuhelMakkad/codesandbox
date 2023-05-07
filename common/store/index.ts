@@ -1,7 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import filesReferenceReducer from "@/store/code/slices/filesReferenceSlice";
+
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    filesReference: filesReferenceReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
