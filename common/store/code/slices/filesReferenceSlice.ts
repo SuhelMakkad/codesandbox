@@ -135,6 +135,23 @@ const deleteFileFromFolder = (parentFolder: FileType, fileId: string) => {
   }
 };
 
+export const collectFileDetailsFromId = (
+  folderTree: FileType,
+  fileIds: string[],
+  collector: Map<string, { name: string }>
+) => {
+  const { id, name, type } = folderTree;
+  if (type === "file" && fileIds.includes(id)) {
+    collector.set(id, { name });
+  }
+
+  if (type === "folder") {
+    folderTree.children?.forEach((file) =>
+      collectFileDetailsFromId(file, fileIds, collector)
+    );
+  }
+};
+
 export const filesReferenceSlice = createSlice({
   name: "filesReference",
   initialState,
