@@ -51,7 +51,7 @@ const Explorer = ({
 
   const handleNewFileCreateSubmit = () => {
     if (newFile.name) {
-      createNewFile(id, newFile.type!, newFile.name);
+      createNewFile(id, newFile.type, newFile.name);
     }
 
     setIsFolderOpen(true);
