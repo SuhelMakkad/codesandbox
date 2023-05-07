@@ -6,7 +6,6 @@ export type FileType = {
   name: string;
   type: "folder" | "file";
   children?: FileType[];
-  isActive?: boolean;
 };
 
 export interface FilesReferenceState {
@@ -76,7 +75,6 @@ const initialState: FilesReferenceState = {
             id: "8",
             name: "index.tsx",
             type: "file",
-            isActive: true,
           },
         ],
       },

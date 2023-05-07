@@ -7,9 +7,9 @@ import {
   createFile,
   deleteFile,
 } from "@/store/code/slices/filesReferenceSlice";
+import { setActiveId } from "@/store/code/slices/activeFileId";
 
 import { VscNewFolder, VscNewFile, VscCloudDownload } from "react-icons/vsc";
-import { BsThreeDotsVertical } from "react-icons/bs";
 
 import Accordion from "@/ui/Accordion";
 import FolderExplorer from "@/ui/FolderExplorer";
@@ -34,9 +34,10 @@ const Explorer = () => {
     type: "file",
   });
 
-  const filesReference = useSelector(
-    (state: RootState) => state.filesReference
-  );
+  const { filesReference, activeFileId } = useSelector((state: RootState) => ({
+    filesReference: state.filesReference,
+    activeFileId: state.activeFileId,
+  }));
   const dispatch = useDispatch();
 
   const createNewFile = (
@@ -46,10 +47,15 @@ const Explorer = () => {
   ) => {
     const file: FileType = { id: uuid(), name, type };
     dispatch(createFile({ file, folderId }));
+    dispatch(setActiveId(file.id));
   };
 
   const deleteFolder = (fileId: string) => {
     dispatch(deleteFile(fileId));
+  };
+
+  const selectFile = (fileId: string) => {
+    dispatch(setActiveId(fileId));
   };
 
   const handleNewFileCreateSubmit = () => {
@@ -137,6 +143,7 @@ const Explorer = () => {
           <FolderExplorer
             id="root"
             files={filesReference.value.children}
+            selectFile={selectFile}
             createNewFile={createNewFile}
             deleteFolder={deleteFolder}
           />

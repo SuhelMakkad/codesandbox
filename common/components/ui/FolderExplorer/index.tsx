@@ -21,6 +21,7 @@ export type Props = {
     name: string
   ) => void;
   deleteFolder: (fileId: string) => void;
+  selectFile: (fileId: string) => void;
 };
 
 const Explorer = ({
@@ -28,6 +29,7 @@ const Explorer = ({
   name,
   isFirst,
   files,
+  selectFile,
   createNewFile,
   deleteFolder,
 }: Props) => {
@@ -121,7 +123,7 @@ const Explorer = ({
         <li className="pl-2">
           <TabEditableButton
             name={newFile.name}
-            iconName={newFile.type === "folder" ? "folder" : newFile.name}
+            iconName={newFile.type === "folder" ? newFile.type : newFile.name}
             type={newFile.type}
             setName={(name) => setNewFile((prev) => ({ ...prev, name }))}
             submit={handleNewFileCreateSubmit}
@@ -138,14 +140,16 @@ const Explorer = ({
                 id={file.id}
                 name={file.name}
                 files={file.children}
+                selectFile={selectFile}
                 createNewFile={createNewFile}
                 deleteFolder={deleteFolder}
               />
             ) : (
               <TabButton
                 type={"file"}
-                iconName={file.name}
                 name={file.name}
+                iconName={file.name}
+                onClick={() => selectFile(file.id)}
                 trailingIconBtns={getFileTrailingBtns(file.id)}
               />
             )}
