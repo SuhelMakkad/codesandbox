@@ -85,7 +85,7 @@ const Explorer = ({
                 trailingIconBtns={[
                   {
                     icon: <VscTrash />,
-                    onClick: () => console.log("delete"),
+                    onClick: () => deleteFolder(file.id),
                   },
                 ]}
               />

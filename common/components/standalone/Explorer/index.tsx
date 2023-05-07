@@ -1,7 +1,10 @@
 import { v4 as uuid } from "uuid";
 
 import { useSelector, useDispatch } from "react-redux";
-import { createFile } from "@/store/code/slices/filesReferenceSlice";
+import {
+  createFile,
+  deleteFile,
+} from "@/store/code/slices/filesReferenceSlice";
 
 import { TbLayoutNavbarCollapse } from "react-icons/tb";
 import { VscNewFolder, VscNewFile } from "react-icons/vsc";
@@ -33,7 +36,9 @@ const Explorer = () => {
     dispatch(createFile({ file, folderId }));
   };
 
-  const deleteFolder = () => {};
+  const deleteFolder = (fileId: string) => {
+    dispatch(deleteFile(fileId));
+  };
 
   const buttons = [
     {

@@ -121,23 +121,46 @@ const addFileToFolder = (
   return folderTree;
 };
 
+const deleteFileFromFolder = (parentFolder: FileType, fileId: string) => {
+  const children = parentFolder.children;
+  if (!children) return;
+
+  for (let index = 0; index < children.length; index++) {
+    const file = children[index];
+
+    if (file.id === fileId) {
+      children.splice(index, 1);
+      return;
+    }
+
+    if (file.type === "folder") {
+      deleteFileFromFolder(file, fileId);
+    }
+  }
+};
+
 export const filesReferenceSlice = createSlice({
   name: "filesReference",
   initialState,
   reducers: {
     createFile: (state, args: AddFileArgs) => {
       const folderTree = state.value;
-      if (!folderTree.children) return;
-
       const payload = args.payload;
       const { folderId, file } = payload;
 
       addFileToFolder(folderTree, folderId, file);
     },
+
+    deleteFile: (state, fileIdPayload: PayloadAction<string>) => {
+      const folderTree = state.value;
+      const fileId = fileIdPayload.payload;
+
+      deleteFileFromFolder(folderTree, fileId);
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { createFile } = filesReferenceSlice.actions;
+export const { createFile, deleteFile } = filesReferenceSlice.actions;
 
 export default filesReferenceSlice.reducer;
