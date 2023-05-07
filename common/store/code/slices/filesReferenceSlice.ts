@@ -38,6 +38,16 @@ const initialState: FilesReferenceState = {
         type: "folder",
         children: [
           {
+            id: "9",
+            name: "index.scss",
+            type: "file",
+          },
+          {
+            id: "19",
+            name: "state.ts",
+            type: "file",
+          },
+          {
             id: "3",
             name: "components",
             type: "folder",
@@ -64,16 +74,11 @@ const initialState: FilesReferenceState = {
               },
             ],
           },
-          // {
-          //   id: "8",
-          //   name: "index.tsx",
-          //   type: "file",
-          //   isActive: true,
-          // },
           {
-            id: "9",
-            name: "index.scss",
+            id: "8",
+            name: "index.tsx",
             type: "file",
+            isActive: true,
           },
         ],
       },

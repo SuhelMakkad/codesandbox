@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 import { VscNewFolder, VscNewFile, VscTrash } from "react-icons/vsc";
 
@@ -33,6 +33,11 @@ const Explorer = ({
 
   if (!files) return <></>;
 
+  const sortedFiles = useMemo(
+    () => [...files].sort((a, b) => (a.type > b.type ? -1 : 1)),
+    [files]
+  );
+
   return (
     <ul className="flex flex-col text-sm text-neutral-200">
       {name && (
@@ -61,7 +66,7 @@ const Explorer = ({
         </li>
       )}
 
-      {files.map((file) => (
+      {sortedFiles.map((file) => (
         <li className={`${isFirst ? "" : "pl-2"}`} key={file.id}>
           <AnimateHeight isActive={isFolderOpen}>
             {file.type === "folder" ? (
