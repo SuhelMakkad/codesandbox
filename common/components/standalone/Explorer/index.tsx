@@ -29,9 +29,6 @@ const Explorer = () => {
     type: "file" | "folder",
     name: string
   ) => {
-    console.log("CALLED::");
-    console.log({ folderId, type, name });
-
     const file: FileType = { id: uuid(), name, type };
     dispatch(createFile({ file, folderId }));
   };

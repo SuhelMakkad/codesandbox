@@ -126,8 +126,6 @@ export const filesReferenceSlice = createSlice({
   initialState,
   reducers: {
     createFile: (state, args: AddFileArgs) => {
-      console.log({ args });
-
       const folderTree = state.value;
       if (!folderTree.children) return;
 

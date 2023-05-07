@@ -48,7 +48,6 @@ const Xterm = () => {
             }
             break;
           case "\u0009":
-            console.log("tabbed", e, ["dd", "ls"]);
             break;
           default:
             if (
@@ -87,7 +86,6 @@ const Xterm = () => {
       }
 
       function handleWrapperResize() {
-        console.log("called");
         fitAddon.fit();
       }
 
