@@ -6,6 +6,8 @@ import { VscNewFolder, VscNewFile, VscTrash } from "react-icons/vsc";
 
 import AnimateHeight from "@/ui/AnimateHeight";
 import TabButton from "./TabButton";
+import TabEditableButton from "./TabEditableButton";
+
 import type { FileType } from "@/store/code/slices/filesReferenceSlice";
 
 export type Props = {
@@ -30,6 +32,15 @@ const Explorer = ({
   deleteFolder,
 }: Props) => {
   const [isFolderOpen, setIsFolderOpen] = useState(true);
+  const [newFile, setNewFile] = useState<{
+    isVisible: boolean;
+    name: string;
+    type: "file" | "folder";
+  }>({
+    isVisible: false,
+    name: "",
+    type: "file",
+  });
 
   if (!files) return <></>;
 
@@ -51,23 +62,50 @@ const Explorer = ({
             trailingIconBtns={[
               {
                 icon: <VscNewFile />,
-                onClick: () => {
-                  createNewFile(id, "file", "new file");
-                  setIsFolderOpen(true);
-                },
+                onClick: () =>
+                  setNewFile({
+                    isVisible: true,
+                    name: "",
+                    type: "file",
+                  }),
               },
               {
                 icon: <VscNewFolder />,
-                onClick: () => {
-                  createNewFile(id, "folder", "new folder");
-                  setIsFolderOpen(true);
-                },
+                onClick: () =>
+                  setNewFile({
+                    isVisible: true,
+                    name: "",
+                    type: "folder",
+                  }),
               },
               {
                 icon: <VscTrash />,
                 onClick: () => deleteFolder(id),
               },
             ]}
+          />
+        </li>
+      )}
+
+      {newFile.isVisible && (
+        <li className="pl-2">
+          <TabEditableButton
+            name={newFile.name}
+            iconName={newFile.type === "folder" ? "folder" : newFile.name}
+            type={newFile.type}
+            setName={(name) => setNewFile((prev) => ({ ...prev, name }))}
+            submit={() => {
+              if (newFile.name) {
+                createNewFile(id, newFile.type!, newFile.name);
+              }
+
+              setIsFolderOpen(true);
+              setNewFile({
+                isVisible: false,
+                name: "",
+                type: "file",
+              });
+            }}
           />
         </li>
       )}

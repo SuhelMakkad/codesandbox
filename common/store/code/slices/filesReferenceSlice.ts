@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-import { uuid } from "uuidv4";
-
 export type FileType = {
   id: string;
   name: string;
