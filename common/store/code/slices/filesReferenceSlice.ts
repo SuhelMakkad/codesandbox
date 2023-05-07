@@ -30,6 +30,7 @@ const initialState: FilesReferenceState = {
         id: "1",
         name: "node_modules",
         type: "folder",
+        children: [],
       },
       {
         id: "2",
@@ -41,21 +42,21 @@ const initialState: FilesReferenceState = {
             name: "components",
             type: "folder",
             children: [
-              {
-                id: "4",
-                name: "Header.tsx",
-                type: "file",
-              },
-              {
-                id: "5",
-                name: "Header.scss",
-                type: "file",
-              },
-              {
-                id: "6",
-                name: "Body.tsx",
-                type: "file",
-              },
+              // {
+              //   id: "4",
+              //   name: "Header.tsx",
+              //   type: "file",
+              // },
+              // {
+              //   id: "5",
+              //   name: "Header.scss",
+              //   type: "file",
+              // },
+              // {
+              //   id: "6",
+              //   name: "Body.tsx",
+              //   type: "file",
+              // },
               {
                 id: "7",
                 name: "Footer.tsx",
@@ -63,12 +64,12 @@ const initialState: FilesReferenceState = {
               },
             ],
           },
-          {
-            id: "8",
-            name: "index.tsx",
-            type: "file",
-            isActive: true,
-          },
+          // {
+          //   id: "8",
+          //   name: "index.tsx",
+          //   type: "file",
+          //   isActive: true,
+          // },
           {
             id: "9",
             name: "index.scss",
@@ -76,16 +77,16 @@ const initialState: FilesReferenceState = {
           },
         ],
       },
-      {
-        id: "10",
-        name: "favicon.ico",
-        type: "file",
-      },
-      {
-        id: "11",
-        name: "package.json",
-        type: "file",
-      },
+      // {
+      //   id: "10",
+      //   name: "favicon.ico",
+      //   type: "file",
+      // },
+      // {
+      //   id: "11",
+      //   name: "package.json",
+      //   type: "file",
+      // },
     ],
   },
 };
@@ -95,10 +96,14 @@ const addFileToFolder = (
   folderId: string,
   file: FileType
 ) => {
-  if (!folderTree.children) return folderTree;
+  if (!folderTree.children) {
+    folderTree.children = [];
+  }
 
   if (folderTree.id === folderId && folderTree.type === "folder") {
-    folderTree.children.unshift(file);
+    if (file.type === "folder" && !file.children) file.children = [];
+
+    folderTree.children = [file, ...folderTree.children];
     return folderTree;
   }
 
@@ -116,6 +121,8 @@ export const filesReferenceSlice = createSlice({
   initialState,
   reducers: {
     createFile: (state, args: AddFileArgs) => {
+      console.log({ args });
+
       const folderTree = state.value;
       if (!folderTree.children) return;
 

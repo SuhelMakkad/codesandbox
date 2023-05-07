@@ -1,36 +1,88 @@
+import { v4 as uuid } from "uuid";
+
+import { useSelector, useDispatch } from "react-redux";
+import { createFile } from "@/store/code/slices/filesReferenceSlice";
+
 import { TbLayoutNavbarCollapse } from "react-icons/tb";
 import { VscNewFolder, VscNewFile } from "react-icons/vsc";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 import Accordion from "@/ui/Accordion";
 import FolderExplorer from "@/ui/FolderExplorer";
-import type { File } from "@/ui/FolderExplorer";
+
+import type { MouseEvent } from "react";
+import type { RootState } from "@/store";
+import type { FileType } from "@/store/code/slices/filesReferenceSlice";
 
 export type Props = {
-  files?: File[];
+  files?: FileType[];
 };
 
-const buttons = [
-  {
-    icon: <VscNewFile />,
-    label: "create new file",
-  },
-  {
-    icon: <VscNewFolder />,
-    label: "create new folder",
-  },
-  {
-    icon: <TbLayoutNavbarCollapse />,
-    label: "collapse all open folders",
-  },
-  {
-    icon: <BsThreeDotsVertical />,
-    label: "more options",
-  },
-];
+const Explorer = () => {
+  const filesReference = useSelector(
+    (state: RootState) => state.filesReference
+  );
+  const dispatch = useDispatch();
 
-const Explorer = ({ files }: Props) => {
-  if (!files) return <></>;
+  const createNewFile = (
+    folderId: string,
+    type: "file" | "folder",
+    name: string
+  ) => {
+    console.log("CALLED::");
+    console.log({ folderId, type, name });
+
+    const file: FileType = { id: uuid(), name, type };
+    dispatch(createFile({ file, folderId }));
+  };
+
+  const deleteFolder = () => {};
+
+  const buttons = [
+    {
+      icon: <VscNewFile />,
+      label: "create new file",
+      onClick: (e: MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+
+        const file: FileType = {
+          id: uuid(),
+          name: "test.ts",
+          type: "file",
+        };
+        dispatch(createFile({ file, folderId: "2" }));
+      },
+    },
+    {
+      icon: <VscNewFolder />,
+      label: "create new folder",
+      onClick: (e: MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+
+        const file: FileType = {
+          id: uuid(),
+          name: "test.ts",
+          type: "folder",
+          children: [],
+        };
+        dispatch(createFile({ file, folderId: "2" }));
+      },
+    },
+    {
+      icon: <TbLayoutNavbarCollapse />,
+      label: "collapse all open folders",
+      onClick: (e: MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+      },
+    },
+    {
+      icon: <BsThreeDotsVertical />,
+      label: "more options",
+      onClick: (e: MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+      },
+    },
+  ];
 
   return (
     <Accordion
@@ -44,6 +96,7 @@ const Explorer = ({ files }: Props) => {
                 key={index}
                 title={button.label}
                 className="hover:text-neutral-100"
+                onClick={button.onClick}
               >
                 {button.icon}
               </button>
@@ -52,7 +105,16 @@ const Explorer = ({ files }: Props) => {
         </div>
       }
     >
-      <FolderExplorer files={files} />
+      {filesReference.value.children ? (
+        <FolderExplorer
+          id="root"
+          files={filesReference.value.children}
+          createNewFile={createNewFile}
+          deleteFolder={deleteFolder}
+        />
+      ) : (
+        <></>
+      )}
     </Accordion>
   );
 };

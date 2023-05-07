@@ -6,21 +6,29 @@ import { VscNewFolder, VscNewFile, VscTrash } from "react-icons/vsc";
 
 import AnimateHeight from "@/ui/AnimateHeight";
 import TabButton from "./TabButton";
-
-export type File = {
-  name: string;
-  type: "folder" | "file";
-  children?: File[];
-  isActive?: boolean;
-};
+import type { FileType } from "@/store/code/slices/filesReferenceSlice";
 
 export type Props = {
-  files?: File[];
+  id: string;
   name?: string;
   isFirst?: boolean;
+  files?: FileType[];
+  createNewFile: (
+    folderId: string,
+    type: "file" | "folder",
+    name: string
+  ) => void;
+  deleteFolder: (fileId: string) => void;
 };
 
-const Explorer = ({ files, name, isFirst }: Props) => {
+const Explorer = ({
+  id,
+  name,
+  isFirst,
+  files,
+  createNewFile,
+  deleteFolder,
+}: Props) => {
   const [isFolderOpen, setIsFolderOpen] = useState(true);
 
   if (!files) return <></>;
@@ -38,15 +46,15 @@ const Explorer = ({ files, name, isFirst }: Props) => {
             trailingIconBtns={[
               {
                 icon: <VscNewFile />,
-                onClick: () => console.log("new file"),
+                onClick: () => createNewFile(id, "file", "new file"),
               },
               {
                 icon: <VscNewFolder />,
-                onClick: () => console.log("new folder"),
+                onClick: () => createNewFile(id, "folder", "new folder"),
               },
               {
                 icon: <VscTrash />,
-                onClick: () => console.log("delete"),
+                onClick: () => deleteFolder(id),
               },
             ]}
           />
@@ -54,10 +62,16 @@ const Explorer = ({ files, name, isFirst }: Props) => {
       )}
 
       {files.map((file) => (
-        <li className={`${isFirst ? "" : "pl-2"}`} key={file.name}>
+        <li className={`${isFirst ? "" : "pl-2"}`} key={file.id}>
           <AnimateHeight isActive={isFolderOpen}>
             {file.type === "folder" ? (
-              <Explorer files={file.children} name={file.name} />
+              <Explorer
+                id={file.id}
+                name={file.name}
+                files={file.children}
+                createNewFile={createNewFile}
+                deleteFolder={deleteFolder}
+              />
             ) : (
               <TabButton
                 type={"file"}

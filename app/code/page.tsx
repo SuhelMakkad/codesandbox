@@ -1,8 +1,8 @@
 "use client";
 
-// // store
-// import { Provider } from "react-redux";
-// import { store } from "@/store/code";
+// store
+import { Provider } from "react-redux";
+import { RootState, store } from "@/store";
 
 // context
 import {
@@ -23,59 +23,8 @@ import PanelResizeHandle from "@/standalone/PanelResizeHandle";
 import Xterm from "@/standalone/Xterm";
 import PreviewWindow from "@/standalone/PreviewIWindow";
 import WindowController from "@/standalone/WindowController";
-import type { File } from "@/ui/FolderExplorer";
 
-const files: File[] = [
-  {
-    name: "node_modules",
-    type: "folder",
-  },
-  {
-    name: "src",
-    type: "folder",
-    children: [
-      {
-        name: "components",
-        type: "folder",
-        children: [
-          {
-            name: "Header.tsx",
-            type: "file",
-          },
-          {
-            name: "Header.scss",
-            type: "file",
-          },
-          {
-            name: "Body.tsx",
-            type: "file",
-          },
-          {
-            name: "Footer.tsx",
-            type: "file",
-          },
-        ],
-      },
-      {
-        name: "index.tsx",
-        type: "file",
-        isActive: true,
-      },
-      {
-        name: "index.scss",
-        type: "file",
-      },
-    ],
-  },
-  {
-    name: "favicon.ico",
-    type: "file",
-  },
-  {
-    name: "package.json",
-    type: "file",
-  },
-];
+import type { FileType } from "@/store/code/slices/filesReferenceSlice";
 
 const activeFiles = [
   {
@@ -112,7 +61,7 @@ const CodePageContent = () => {
           className="!h-auto grow"
         >
           <Panel ref={explorerPanelRef} defaultSize={20} minSize={0}>
-            <Explorer files={files} />
+            <Explorer />
           </Panel>
 
           <PanelResizeHandle direction="horizontal" />
@@ -152,8 +101,10 @@ const CodePageContent = () => {
 
 export default function CodePage() {
   return (
-    <PanelRefsContextProvider>
-      <CodePageContent />
-    </PanelRefsContextProvider>
+    <Provider store={store}>
+      <PanelRefsContextProvider>
+        <CodePageContent />
+      </PanelRefsContextProvider>
+    </Provider>
   );
 }
