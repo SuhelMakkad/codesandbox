@@ -51,6 +51,7 @@ const Explorer = ({
 
   return (
     <ul className="flex flex-col text-sm text-neutral-200">
+      {/* Name of the folder or file */}
       {name && (
         <li>
           <TabButton
@@ -87,6 +88,7 @@ const Explorer = ({
         </li>
       )}
 
+      {/* Input field for new file or folder */}
       {newFile.isVisible && (
         <li className="pl-2">
           <TabEditableButton
@@ -110,6 +112,7 @@ const Explorer = ({
         </li>
       )}
 
+      {/* folder children */}
       {sortedFiles.map((file) => (
         <li className={`${isFirst ? "" : "pl-2"}`} key={file.id}>
           <AnimateHeight isActive={isFolderOpen}>
