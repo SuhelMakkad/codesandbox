@@ -54,7 +54,7 @@ const FileTabs = () => {
           id={`tab-btn-${fileId}`}
           key={fileId}
           onClick={() => dispatch(selectActiveFile(fileId))}
-          className={`group relative flex items-center gap-2 py-2 pl-4 pr-3 transition-[background-color,color,opacity] duration-100 after:absolute after:left-0 after:right-0 after:top-0 after:h-[2px] after:bg-blue-400 after:transition-opacity ${
+          className={`group relative flex items-center gap-2 whitespace-nowrap py-2 pl-4 pr-3 transition-[background-color,color,opacity] duration-100 after:absolute after:left-0 after:right-0 after:top-0 after:h-[2px] after:bg-blue-400 after:transition-opacity ${
             fileId === selectedFileId
               ? "bg-transparent text-white after:opacity-100"
               : "bg-neutral-800 text-neutral-400 after:opacity-0  hover:bg-neutral-700/25 hover:text-neutral-200"
