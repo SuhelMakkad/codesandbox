@@ -2,7 +2,7 @@
 
 // store
 import { Provider } from "react-redux";
-import { RootState, store } from "@/store";
+import { store } from "@/store";
 
 // context
 import {
@@ -17,12 +17,13 @@ import { Panel, PanelGroup } from "react-resizable-panels";
 // default components
 import PlaygroundHeader from "@/standalone/PlaygroundHeader";
 import SideTabSelectorNav from "@/standalone/SideTabSelectorNa";
-import Explorer from "@/standalone/Explorer";
+import Explorer from "@/standalone/SideNav/Explorer";
 import FileTabs from "@/standalone/FileTabs";
 import PanelResizeHandle from "@/ui/PanelResizeHandle";
 import Xterm from "@/standalone/Xterm";
 import PreviewWindow from "@/standalone/PreviewIWindow";
 import WindowController from "@/standalone/WindowController";
+import SideNav from "@/standalone/SideNav";
 
 const CodePageContent = () => {
   const {
@@ -46,7 +47,7 @@ const CodePageContent = () => {
           className="!h-auto grow"
         >
           <Panel ref={explorerPanelRef} defaultSize={20} minSize={0}>
-            <Explorer />
+            <SideNav />
           </Panel>
 
           <PanelResizeHandle direction="horizontal" />

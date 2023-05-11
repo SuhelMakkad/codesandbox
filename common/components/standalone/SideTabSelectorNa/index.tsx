@@ -31,7 +31,7 @@ const SideTabSelectorNav = () => {
 
   return (
     <nav className="flex flex-col border-r border-r-neutral-600 bg-neutral-800 text-2xl text-neutral-400">
-      {buttons.map((button, index) => (
+      {buttons.map((button) => (
         <button
           key={button.id}
           onClick={() => dispatch(selectSidePanel(button.id))}
