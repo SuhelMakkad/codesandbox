@@ -19,7 +19,7 @@ import PlaygroundHeader from "@/standalone/PlaygroundHeader";
 import SideTabSelectorNav from "@/standalone/SideTabSelectorNa";
 import Explorer from "@/standalone/Explorer";
 import FileTabs from "@/standalone/FileTabs";
-import PanelResizeHandle from "@/standalone/PanelResizeHandle";
+import PanelResizeHandle from "@/ui/PanelResizeHandle";
 import Xterm from "@/standalone/Xterm";
 import PreviewWindow from "@/standalone/PreviewIWindow";
 import WindowController from "@/standalone/WindowController";
