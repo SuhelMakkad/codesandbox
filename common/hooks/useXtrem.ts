@@ -99,6 +99,10 @@ export const xtermInit = async (
     }
   });
 
+  socket.onmessage = (event) => {
+    term.write(event.data);
+  };
+
   function clearInput(command: string) {
     var inputLength = command.length;
     for (var i = 0; i < inputLength; i++) {
@@ -110,10 +114,6 @@ export const xtermInit = async (
     command = "";
     term.write("\r\n$ ");
   }
-
-  socket.onmessage = (event) => {
-    term.write(event.data);
-  };
 
   function runCommand(command: string) {
     if (command.length > 0) {
